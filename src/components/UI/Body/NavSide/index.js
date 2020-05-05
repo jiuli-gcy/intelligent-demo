@@ -34,7 +34,7 @@ const menus = [
         icon: 'icon-Customermanagement',
         key: '/admin/user',
         subs: [
-            { key: '/admin/display/carousel', title: '游客信息', icon: '' },
+            { key: '/admin/user/userinfo', title: '游客信息', icon: '' },
             { key: '/admin/user/suggestion', title: '反馈管理', icon: '' },
         ]
     },
@@ -56,7 +56,11 @@ const menus = [
     {
         title: '员工管理',
         icon: 'icon-tongxunlu',
-        key: '/admin/staff'
+        key: '/admin/staff',
+        subs: [
+            { key: '/admin/staff/staffinfo', title: '员工信息', icon: '' },
+            { key: '/admin/staff/permission', title: '权限管理', icon: '' },
+        ]
     }
 ]
 const styles = {

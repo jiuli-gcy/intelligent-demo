@@ -2,14 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import Admin from './admin';
+import Router from './router';
 import 'antd/dist/antd.css';
 import {BrowserRouter} from 'react-router-dom'
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-    <BrowserRouter>
-    <Admin />
-    </BrowserRouter>,
+    <Router />,
   document.getElementById('root')
 );
 

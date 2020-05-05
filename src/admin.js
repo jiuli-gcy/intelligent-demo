@@ -10,23 +10,22 @@ class Admin extends Component{
     render(){
         return(
             <Row>
-                <Col span="4" style={style}>
+                <Col span="4" style={{backgroundColor:'#001529'}}>
                     <NavSide/>
                 </Col>
                 <Col span="20"  style={{background: '#fff', padding: '0 16px'}}>
                     <NavTop />
-                    <Content>
-                        
-                    </Content>
-                    <Footer style={{textAlign: 'center'}}>ZUCC gcy@2020</Footer>
+                    <Layout>
+                        <Content>
+                            {/* Content */}
+                            {this.props.children}
+                        </Content>
+                        <Footer style={{textAlign: 'center'}}>ZUCC gcy@2020</Footer>
+                    </Layout>
                 </Col>
             </Row>
         )
     }
-}
-
-const style={
-    color:'#001529',
 }
 
 export default Admin;
