@@ -1,30 +1,26 @@
 import React, { Component } from 'react'
-import { HashRouter, Route, Switch, Redirect} from 'react-router-dom'
-import App from './App'
-import Admin from './admin'
-import Login from './pages/Login'
-import Error from './pages/Error'
-import Home from './pages/Home'
-import Staff from './pages/Staff'
+import { withRouter, HashRouter, Route, Switch, Redirect} from 'react-router-dom'
+import LoadableComponent from './utils/LoadableComponent'
+import PrivateRoute from './components/Function/PrivateRoute'
 
-export default class Router extends Component {
+//参数一定要是函数，否则不会懒加载，只会代码拆分
+const Home = LoadableComponent(()=>import('./pages/Home'))
+const Error = LoadableComponent(()=>import('./pages/Error'))
+const Staff = LoadableComponent(()=>import('./pages/Staff'))
+
+@withRouter
+class Router extends Component {
     render(){
         return (
-            <HashRouter>
-                <App>
-                    <Route path="/login" component={Login}/>
-                    <Route path="/error" component={Error}/>
-                    <Route path="/admin" render={()=>
-                        <Admin>
-                            <Switch>
-                                <Route path="/admin/home" component={Home}/>
-                                <Route path="/admin/staff" component={Staff} />
-                                <Route component={Error}/>
-                            </Switch>
-                        </Admin>
-                    }/>
-                </App>
-            </HashRouter>
+            <Switch>
+                <Redirect exact from='/' to='/admin/home'/>
+                <Route exact path="/admin/home" component={Home}/>
+                <Route exact path="/admin/staff/staffinfo" component={Staff} />
+                <Route exact exact from='/' to='/admin/home'/>
+                <Route exact component={Error} />
+            </Switch>
         );
     }
 }
+
+export default Router;

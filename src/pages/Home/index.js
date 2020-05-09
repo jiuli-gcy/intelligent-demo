@@ -1,11 +1,15 @@
-import React, { Component } from 'react'
+import React ,{ Component } from 'react'
+import { Card, Row, Col, BackTop } from 'antd'
 
-export default class Home extends Component {
+
+class Home extends Component {
     render() {
         return (
             <div>
-                Home
+                主页
             </div>
         )
     }
 }
+
+export default Home

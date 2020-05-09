@@ -1,14 +1,19 @@
 import React from 'react'
+import { Link, withRouter } from 'react-router-dom'
+import { inject, observer } from 'mobx-react'
 import { Row, Col } from "antd"
 //import {formateDate} from '../../../../utils/formateDate'
 import moment from 'moment'
 import axios from '../../../../utils/axios'
+import { isAuthenticated } from '../../../../utils/Session'
 import './index.css'
 
+//withRouter一定要写在前面，不然路由变化不会反映到props中去
+@withRouter @inject('appStore') @observer
 class NavTop extends React.Component {
     componentWillMount() {
         this.setState({
-            userName: 'Jiuli',
+            userName: 'Admin',
             sysTime: moment().format('YYYY-MM-DD')
         })
         this.getWeatherAPIData();
@@ -28,20 +33,24 @@ class NavTop extends React.Component {
             }
         })
     }
+    logout = () => {
+        this.props.appStore.toggleLogin(false)
+        this.props.history.push(this.props.location.pathname)
+    }
     render() {
         return (
             <div className="header">
                 <Row className="header-top">
-                    <Col span="24">
-                        <span>欢迎，{this.state.userName}</span>
-                        <a href="#">退出</a>
+                    <Col span={24}>
+                        <span>欢迎， {isAuthenticated()}</span>
+                        <a href="#" onClick={this.logout}>退出</a>
                     </Col>
                 </Row>
                 <Row className="breadcrumb">
-                    <Col span="4" className="breadcrumb-title">
+                    <Col span={4} className="breadcrumb-title">
                         首页
                     </Col>
-                    <Col span="20" className="weather">
+                    <Col span={20} className="weather">
                         <span className="date">
                             {this.state.sysTime}
                         </span>
