@@ -1,3 +1,7 @@
+import React from 'react';
+import { Select } from 'antd'
+const Option = Select.Option;
+
 function accMul(arg1, arg2) {
   let m = 0;
   const s1 = arg1.toString();
@@ -34,33 +38,106 @@ export function digitUppercase(n) {
 }
 
 
-/**
- * 生成指定区间的随机整数
- * @param min
- * @param max
- * @returns {number}
- */
+//生成指定区间的随机整数
 export function randomNum(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 
-/**
- * 计算提示框的宽度
- * @param str
- * @returns {number}
- */
+//计算提示框的宽度
 export function calculateWidth(arr){
   return 30 + arr[0].length*15
 }
 
-/**
- * 图片预加载
- * @param arr
- * @constructor
- */
+//图片预加载
 export function preloadingImages(arr) {
   arr.forEach(item=>{
     const img = new Image()
     img.src = item
   })
+}
+
+export function formateDate(time){
+  if(!time)return '';
+  let date = new Date(time);
+  return date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()+' '+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds();
+}
+
+export function pagination(data,callback){
+  return {
+      onChange:(current)=>{
+          callback(current)
+      },
+      current:data.result.page,
+      pageSize:data.result.page_size,
+      total: data.result.total_count,
+      showTotal:()=>{
+          return `共${data.result.total_count}条`
+      },
+      showQuickJumper:true
+  }
+}
+
+// 格式化金额,单位:分(eg:430分=4.30元)
+export function formatFee(fee, suffix = '') {
+  if (!fee) {
+      return 0;
+  }
+  return Number(fee).toFixed(2) + suffix;
+}
+
+// 格式化公里（eg:3000 = 3公里）
+export function formatMileage(mileage, text) {
+  if (!mileage) {
+      return 0;
+  }
+  if (mileage >= 1000) {
+      text = text || " km";
+      return Math.floor(mileage / 100) / 10 + text;
+  } else {
+      text = text || " m";
+      return mileage + text;
+  }
+}
+
+// 隐藏手机号中间4位
+export function formatPhone(phone) {
+  phone += '';
+  return phone.replace(/(\d{3})\d*(\d{4})/g, '$1***$2')
+}
+
+// 隐藏身份证号中11位
+export function formatIdentity(number) {
+  number += '';
+  return number.replace(/(\d{3})\d*(\d{4})/g, '$1***********$2')
+}
+
+export function getOptionList(data){
+  if(!data){
+      return [];
+  }
+  let options = [] //[<Option value="0" key="all_key">全部</Option>];
+  data.map((item)=>{
+      options.push(<Option value={item.id} key={item.id}>{item.name}</Option>)
+  })
+  return options;
+}
+
+/**
+* ETable 行点击通用函数
+* @param {*选中行的索引} selectedRowKeys
+* @param {*选中行对象} selectedItem
+*/
+export function updateSelectedItem(selectedRowKeys, selectedRows, selectedIds) {
+  if (selectedIds) {
+      this.setState({
+          selectedRowKeys,
+          selectedIds: selectedIds,
+          selectedItem: selectedRows
+      })
+  } else {
+      this.setState({
+          selectedRowKeys,
+          selectedItem: selectedRows
+      })
+  }
 }
