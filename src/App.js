@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Route,Switch} from 'react-router-dom'
-import './App.css';
+import './styles/App.css';
 import PrivateRoute from './components/Function/PrivateRoute'
 import Admin from './admin'
 import Login from './pages/Login'

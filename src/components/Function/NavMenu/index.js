@@ -1,17 +1,17 @@
-import React from 'react'
-import {Link,withRouter} from 'react-router-dom'
-import {Menu} from 'antd'
-import {createFromIconfontCN} from '@ant-design/icons'
+import React, { Component } from 'react'
+import { Link, withRouter } from 'react-router-dom'
+import { Menu } from 'antd'
+import { createFromIconfontCN } from '@ant-design/icons'
 
 const IconFont = createFromIconfontCN({
-  scriptUrl:[
+  scriptUrl: [
     '//at.alicdn.com/t/font_1794536_5ib55z16y0n.js'
   ]
 });
 
 //此组件的意义就是将数据抽离出来，通过传递数据去渲染
 @withRouter
-class NavMenu extends React.Component {
+class NavMenu extends Component {
   state = {
     openKeys: [],
     selectedKeys: []
@@ -23,18 +23,18 @@ class NavMenu extends React.Component {
     //获取当前所在的目录层级
     const rank = pathname.split('/')
     switch (rank.length) {
-      case 2 :  //一级目录
+      case 2:  //一级目录
         this.setState({
           selectedKeys: [pathname]
         })
         break;
-      case 5 : //三级目录，要展开两个subMenu
+      case 5: //三级目录，要展开两个subMenu
         this.setState({
           selectedKeys: [pathname],
           openKeys: [rank.slice(0, 3).join('/'), rank.slice(0, 4).join('/')]
         })
         break;
-      default :
+      default:
         this.setState({
           selectedKeys: [pathname],
           openKeys: [pathname.substr(0, pathname.lastIndexOf('/'))]
@@ -77,19 +77,19 @@ class NavMenu extends React.Component {
     }
   }
 
-  renderMenuItem = ({key, icon, title,}) => {
+  renderMenuItem = ({ key, icon, title, }) => {
     return (
       <Menu.Item key={key}>
         <Link to={key}>
-          {icon && <IconFont type={icon}/>}
+          {icon && <IconFont type={icon} />}
           <span>{title}</span>
         </Link>
       </Menu.Item>
     )
   }
-  renderSubMenu = ({key, icon, title, subs}) => {
+  renderSubMenu = ({ key, icon, title, subs }) => {
     return (
-      <Menu.SubMenu key={key} title={<span>{icon && <IconFont type={icon}/>}<span>{title}</span></span>}>
+      <Menu.SubMenu key={key} title={<span>{icon && <IconFont type={icon} />}<span>{title}</span></span>}>
         {
           subs && subs.map(item => {
             return item.subs && item.subs.length > 0 ? this.renderSubMenu(item) : this.renderMenuItem(item)
@@ -100,11 +100,11 @@ class NavMenu extends React.Component {
   }
 
   render() {
-    const {openKeys, selectedKeys} = this.state
+    const { openKeys, selectedKeys } = this.state
     return (
       <Menu
         onOpenChange={this.onOpenChange}
-        onClick={({key}) => this.setState({selectedKeys: [key]})}
+        onClick={({ key }) => this.setState({ selectedKeys: [key] })}
         openKeys={openKeys}
         selectedKeys={selectedKeys}
         theme={this.props.theme ? this.props.theme : 'dark'}
