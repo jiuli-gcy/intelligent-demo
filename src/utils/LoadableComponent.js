@@ -5,10 +5,10 @@ import 'nprogress/nprogress.css'
 
 class LoadingPage extends Component {
   //类似github页面加载的那个加载条
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     NProgress.start()
   }
-  componentWillUnmount() {
+  UNSAFE_componentWillUnmount() {
     NProgress.done()
   }
   render() {

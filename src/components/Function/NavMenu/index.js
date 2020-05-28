@@ -42,7 +42,7 @@ class NavMenu extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     //当点击面包屑导航时，侧边栏要同步响应
     const pathname = nextProps.location.pathname
     if (this.props.location.pathname !== pathname) {

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import BGParticle from '../../utils/BGParticle'
-import {preloadingImages} from '../../utils/utils'
 import { notification } from 'antd'
 import { withRouter } from 'react-router-dom'
 import { inject, observer } from 'mobx-react'

@@ -5,7 +5,7 @@ import APP from './App'
 import { LocaleProvider } from 'antd';
 import zhCN from 'antd/es/locale-provider/zh_CN';
 import 'antd/dist/antd.css';
-import { BrowserRouter , HashRouter } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
 import { Provider} from 'mobx-react'
 import * as serviceWorker from './serviceWorker';
 import store from './Redux/store/index'
@@ -16,7 +16,7 @@ ReactDOM.render(
         <Provider {...store}>
           <APP></APP>
         </Provider>
-    </LocaleProvider >
+    </LocaleProvider>
   </BrowserRouter>,
 document.getElementById('root'));
 

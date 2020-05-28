@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, Avatar, Row, Col, BackTop, Timeline, Collapse, Table, Icon } from 'antd'
+import { Card, Empty, Row, Col, BackTop, Icon } from 'antd'
 import '../../styles/App.css'
 
 import ReactEcharts from 'echarts-for-react';
@@ -13,23 +13,7 @@ import ReactEcharts from 'echarts-for-react';
 // import 'echarts/lib/component/legend'
 // import 'echarts/lib/component/toolbox'
 const { Meta } = Card;
-const Panel = Collapse.Panel;
 
-const classify = [
-    "社会",
-    "爱情",
-    "友情"
-];
-const text = [
-    "只有人们的社会实践，才是人们对于外界认识的真理性的标准。真理的标准只能是社会的实践。",
-    "这世界要是没有爱情，它在我们心中还会有什么意义！这就如一盏没有亮光的走马灯。",
-    "友谊是灵魂的结合，这个结合是可以离异的，这是两个敏感，正直的人之间心照不宣的契约。"
-];
-const author = [
-    " —— 毛泽东",
-    " —— 歌德",
-    " —— 伏尔泰"
-];
 
 
 class Home extends Component {
@@ -253,13 +237,13 @@ class Home extends Component {
                         </Card>
                     </Col>
                     <Col md={8}>
-                        <Card  className='chartTop'
+                        <Card  className='card-item'
                             style={{ marginBottom: 16 }}
                             bodyStyle={{ padding: 0, height: '277px', overflow: 'hidden' }}>
                             <div className='total'>
-                                <h1><Icon type="solution" /> 我的部门</h1>
+                                <Icon type="solution" /> 我的待办
                             </div>
-                                高层
+                                <Empty />
                             </Card>
                     </Col>
                 </Row>

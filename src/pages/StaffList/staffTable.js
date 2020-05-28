@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
-import { Table, Icon, Popconfirm, Tooltip } from 'antd';
-import moment from 'moment';
+import { Table, Icon, Tooltip } from 'antd';
 
 class StaffTable extends Component {
-    constructor(props) {
-        super(props);
-    }
     render() {
         const { onDelete, editClick, dataSource } = this.props;
         console.log('2props:', this.props);
@@ -49,13 +45,13 @@ class StaffTable extends Component {
             render: (text, record, index) =>
                     <div className="opera">
                         <Tooltip title="编辑">
-                            <span style={{ fontSize: '18px', margin: '5px' }} onClick={() => editClick(record.id, index)}>
+                            <span style={{ fontSize: '18px', margin: '5px' }} onClick={() => editClick(record.key, index)}>
                                 <Icon type="edit" />
                             </span>
                         </Tooltip>
                         |
                     <Tooltip title="移除">
-                            <span style={{ fontSize: '18px', margin: '5px' }} onClick={() => onDelete(record.id, record.fkEmployeeGh)}>
+                            <span style={{ fontSize: '18px', margin: '5px' }} onClick={() => onDelete(record.key)}>
                                 <Icon type="user-delete" />
                             </span>
                         </Tooltip>
@@ -69,7 +65,7 @@ class StaffTable extends Component {
         // }
         return (
             <Table
-                rowKey={record => record.id}
+                rowKey={record => record.key}
                 columns={columns}
                 dataSource={dataSource}
                 bordered

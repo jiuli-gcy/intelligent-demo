@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, Avatar, Row, Col, Button, BackTop, Collapse, Table, Icon } from "antd";
+import { Card, Row, Col, Button, BackTop, Table, Icon } from "antd";
 
 const columns = [
     { title: '姓名', width: 100, dataIndex: 'name', key: 'name', fixed: 'left', align: 'center' },

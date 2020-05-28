@@ -1,7 +1,7 @@
 import React , { Component }  from 'react'
 import bodymovin from 'bodymovin'
 
-class Loading2 extends React.Component{
+class Loading2 extends Component{
   componentDidMount(){
     const animData = {
       wrapper: document.querySelector('#animationWindow'),

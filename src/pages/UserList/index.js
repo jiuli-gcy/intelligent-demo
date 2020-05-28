@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Input, Icon, Select, Button, BackTop, Card, Modal } from 'antd';
+import { Row, Col, Input, Icon, Button, BackTop, Card, Modal } from 'antd';
 //import style from './member.module.scss';
 import moment from 'moment';
 //import http from 'utils/http';
@@ -8,12 +8,9 @@ import moment from 'moment';
 //import PMOReleaseForm from './PMORelease';
 //import { MemberAddForm, MemberApplyForm, MemberReleaseForm } from 'components';
 
-import StaffTable from './staffTable';
+import UserTable from './userTable'
 
 const { Search } = Input;
-const InputGroup = Input.Group;
-const options = [];
-const { Option } = Select;
 
 //找到对应元素的索引
 // function catchIndex(arr, key){ //获取INDEX
@@ -35,14 +32,13 @@ const { Option } = Select;
 // }
 //const getMembers = (url, params) => http.get(url, params);
 
-class Staff extends Component {
+class User extends Component {
     constructor(props) {
         super(props);
         this.state = {
             status: this.props.status,
             //url: `/member/listMember?projectId=${this.props.projid}`,
             searchName: '',
-            searchDepartment: undefined,
             //editvisible: false, //编辑窗口
             //visible: false, //添加窗口
             //appvisible: false, //申请窗口
@@ -67,76 +63,76 @@ class Staff extends Component {
         this.setState({
             dataSource: [{
                 "key": 0,
-                "staffName": "魏欢",
-                "staffId": 1,
-                "staffSex": "女",
-                "department": "董事会",
-                "staffTel": "13355223334",
-                "staffLevel": "2",
+                "userName": "简丽",
+                "userId": 1,
+                "userEmail": "marinus.jagesar@example.com",
+                "userWechat": "jagesar",
+                "userTel": "18355223334",
+                "createTime": "2",
             }, {
                 "key": 1,
-                "staffName": "真子则",
-                "staffId": 2,
-                "staffSex": "男",
-                "department": "经理",
-                "staffTel": "13388223334",
-                "staffLevel": "2",
+                "userName": "高达",
+                "userId": 2,
+                "userEmail": "zachary.lavigne@example.com",
+                "userWechat": "zachary",
+                "userTel": "13388223334",
+                "createTime": "2",
             }, {
                 "key": 2,
-                "staffName": "魏如梭",
-                "staffId": 3,
-                "staffSex": "女",
-                "department": "行政",
-                "staffTel": "13377223334",
-                "staffLevel": "2",
+                "userName": "白飞飞",
+                "userId": 3,
+                "userEmail": "levi.willis@example.com",
+                "userWechat": "levi",
+                "userTel": "13377223334",
+                "createTime": "2",
             }, {
                 "key": 3,
-                "staffName": "魏一",
-                "staffId": 4,
-                "staffSex": "女",
-                "department": "交通",
-                "staffTel": "13366223334",
-                "staffLevel": "2",
+                "userName": "朱七七",
+                "userId": 4,
+                "userEmail": "tobias.pedersen@example.com",
+                "userWechat": "tobias",
+                "userTel": "13366223334",
+                "createTime": "2",
             }, {
                 "key": 4,
-                "staffName": "白百何",
-                "staffId": 5,
-                "staffSex": "女",
-                "department": "企划",
-                "staffTel": "13366278334",
-                "staffLevel": "2",
+                "userName": "张飞",
+                "userId": 5,
+                "userEmail": "samuel.leon@example.com",
+                "userWechat": "samuel",
+                "userTel": "13366278334",
+                "createTime": "2",
             }, {
                 "key": 5,
-                "staffName": "甄子丹",
-                "staffId": 6,
-                "staffSex": "男",
-                "department": "宣传",
-                "staffTel": "13366225634",
-                "staffLevel": "2",
+                "userName": "李达康",
+                "userId": 6,
+                "userEmail": "dakang@example.com",
+                "userWechat": "dakang",
+                "userTel": "18666225634",
+                "createTime": "2",
             }, {
                 "key": 6,
-                "staffName": "闫明瑞",
-                "staffId": 7,
-                "staffSex": "男",
-                "department": "市场",
-                "staffTel": "13366223444",
-                "staffLevel": "2",
+                "userName": "马冬梅",
+                "userId": 7,
+                "userEmail": "dongmei@example.com",
+                "userWechat": "dongmei",
+                "userTel": "13366323444",
+                "createTime": "2",
             }, {
                 "key": 7,
-                "staffName": "高阳",
-                "staffId": 8,
-                "staffSex": "男",
-                "department": "后勤",
-                "staffTel": "13366221234",
-                "staffLevel": "2",
+                "userName": "展昭",
+                "userId": 8,
+                "userEmail": "zhanzhao@example.com",
+                "userWechat": "zhanzhao",
+                "userTel": "13712345678",
+                "createTime": "2",
             }, {
                 "key": 8,
-                "staffName": "文静",
-                "staffId": 9,
-                "staffSex": "女",
-                "department": "销售",
-                "staffTel": "13366223114",
-                "staffLevel": "2",
+                "userName": "范闲",
+                "userId": 9,
+                "userEmail": "fanxian@example.com",
+                "userWechat": "fanxian",
+                "userTel": "13398223114",
+                "createTime": "2",
             }]
         });
 
@@ -190,31 +186,17 @@ class Staff extends Component {
         const { dataSource } = this.state;
         //console.log(dataSource)
         this.setState({
-            dataSource: dataSource.filter(item => item.staffName.indexOf(value) !== -1),
+            dataSource: dataSource.filter(item => item.userName.indexOf(value) !== -1),
             loading: false,
         });
         //console.log(this.state.showData);
         //console.log(this.state.dataSource);
     };
-    部门搜索
-    Department_Select = (value) => {
-        const department = value;
-        this.setState({
-            searchDepartment: department,
-        });
-        this.getData()
-        console.log(this.state)
-        const { dataSource } = this.state;
-        this.setState({
-            dataSource: dataSource.filter(item => item.department.indexOf(value) !== -1),
-            loading: false,
-        });
-    }
+    
     //重置按钮清空搜索条件
     btnClear_Click = () => {
         this.setState({
             searchName: '',
-            searchDepartment: undefined,
             dataSource: [],
             showData: [],
         });
@@ -324,7 +306,7 @@ class Staff extends Component {
             if (item.id === id) {
                 return item;
             }
-            return null
+            return null;
         });
         this.setState({
             edit: editMembers[0],
@@ -356,79 +338,23 @@ class Staff extends Component {
             editvisible: true,
         });
     };
-    handleUpdate = () => {
-        console.log("修改")
-        // const form = this.editForm;
-        // form.validateFields((err, values) => {
-        //     if (err) {
-        //         return;
-        //     }
-        //     var startTime;
-        //     var endTime;
-        //     if (values.estimateEndTime != null) {
-        //         endTime = moment(values.estimateEndTime).format('YYYY-MM-DD')
-        //     } else {
-        //         endTime = null;
-        //     }
-        //     if (values.realStartTime != null) {
-        //         startTime = moment(values.realStartTime).format('YYYY-MM-DD')
-        //     } else {
-        //         startTime = null;
-        //     }
-        //     const data = {
-        //         estimateEndTime: endTime,
-        //         id: this.state.edit.id,
-        //         memberFunc: values.memberFunc,
-        //         memberJob: values.memberJob,
-        //         memberJobBand: values.memberJobBand,
-        //         memberSup: values.memberSup,
-        //         realStartTime: startTime,
-        //     }
-        //     updateMember(data).then(res => {
-        //         message.success('修改成功');
-        //         this.getData();
-        //     }).catch(err => {
-        //         message.error('修改失败');
-        //     });
-        //     this.setState({
-        //         editvisible: false
-        //     });
-        // });
-    }
 
     //-----------------------------------------------------------------
     render() {
-        const { searchName, searchDepartment, status, dataSource, releaseVisible, loading, joblist } = this.state;
+        const { searchName, status, dataSource, releaseVisible, loading } = this.state;
         return (
             <div>
                 <div id="cards" style={{ padding: '15px' }}>
-                    <Card title="景区员工">
+                    <Card title="景区游客">
                         <Row style={{ float: 'right', zIndex: '2' }}>
                             <Col className="gutter-row" style={{ marginBottom: '15px' }} span={8}>
                                 <Search
-                                    placeholder="员工搜索"
+                                    placeholder="用户搜索"
                                     prefix={<Icon type="user" />}
                                     onChange={this.onChangeUserName}
                                     onSearch={this.onSearchUserName}
                                     value={searchName}
                                 />
-                            </Col>
-                            <Col className="gutter-row" span={9}>
-                                <InputGroup compact>
-                                    <Select style={{ width: '165px', marginLeft: '15.5px' }}
-                                        options={options}
-                                        placeholder="角色搜索"
-                                        onChange={this.Department_Select}
-                                        value={searchDepartment}
-                                        onMouseEnter={this.getJob}
-                                    >
-                                        {
-                                            joblist.map((item, index) => (
-                                                <Option key={index} value={item}>{item}</Option>
-                                            ))
-                                        }
-                                    </Select>
-                                </InputGroup>
                             </Col>
                             <Col className="gutter-row" span={7}>
                                 <div className="btnOpera">
@@ -436,10 +362,7 @@ class Staff extends Component {
                                 </div>
                             </Col>
                         </Row>
-                        <Row style={{ float: 'left', zIndex: '1' }}>
-                            <Button icon="plus" onClick={this.CreateMember}>添加成员</Button>
-                        </Row>
-                        <StaffTable
+                        <UserTable
                             status={status}
                             dataSource={dataSource}
                             onDelete={this.onDelete}
@@ -465,4 +388,4 @@ class Staff extends Component {
     }
 }
 
-export default Staff;
+export default User;

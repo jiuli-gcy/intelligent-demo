@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Row , Col , Layout } from 'antd';
+import { Layout } from 'antd';
 import NavSide from './components/UI/Body/NavSide'
 import NavTop from './components/UI/Body/NavTop'
 import Router from './router'

@@ -1,5 +1,5 @@
-import React from 'react'
-import { Link, withRouter } from 'react-router-dom'
+import React,{ Component } from 'react'
+import { withRouter } from 'react-router-dom'
 import { inject, observer } from 'mobx-react'
 import { Row, Col } from "antd"
 //import {formateDate} from '../../../../utils/formateDate'
@@ -10,8 +10,8 @@ import './index.css'
 
 //withRouter一定要写在前面，不然路由变化不会反映到props中去
 @withRouter @inject('appStore') @observer
-class NavTop extends React.Component {
-    componentWillMount() {
+class NavTop extends Component {
+    UNSAFE_componentWillMount() {
         this.setState({
             userName: 'Admin',
             sysTime: moment().format('YYYY-MM-DD')
@@ -43,12 +43,11 @@ class NavTop extends React.Component {
                 <Row className="header-top">
                     <Col span={24}>
                         <span>欢迎， {isAuthenticated()}</span>
-                        <a href="#" onClick={this.logout}>退出</a>
+                        <a href="/#" onClick={this.logout}>退出</a>
                     </Col>
                 </Row>
                 <Row className="breadcrumb">
                     <Col span={4} className="breadcrumb-title">
-                        首页
                     </Col>
                     <Col span={20} className="weather">
                         <span className="date">

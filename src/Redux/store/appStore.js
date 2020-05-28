@@ -19,7 +19,7 @@ class AppStore {
   }
   @action initUsers() {
     const localUsers = localStorage['users']?JSON.parse(localStorage['users']):[]
-    this.users = [{username: 'admin', password: 'admin'},...localUsers]
+    this.users = [{username: 'admin', password: 'admin'},{username: 'staff', password: 'staff'},...localUsers]
   }
 }
 
