@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { Card, Button } from 'antd'
 import { toJS } from 'mobx';
 import { inject, observer } from 'mobx-react'
-import AreaForm from './AreaForm'
+import AreaForm from './AreaAddForm'
+import AreaEditForm from './AreaEditForm'
 import AreaTable from './AreaTable'
 
 @inject('areaStore') @observer
@@ -11,11 +12,13 @@ class Area extends Component {
     super(props);
     this.state = {
       isUpdate: false,
-      visible: false, //窗口隐藏
+      addvisible: false, //窗口隐藏
+      editvisible:false
     };
   }
 
   requestdata = () => {
+    this.props.areaStore.getDataFromSessionStorage();
     const areas = toJS(this.props.areaStore.areas);
     this.renderMap(areas);
   }
@@ -96,27 +99,18 @@ class Area extends Component {
     }
   }
 
-  //接受新建表单数据
-  saveFormRef = (form) => {
-    this.form = form;
-  };
   //新建弹窗
   CreateArea = () => {
     this.setState({
-      visible: true,
+      addvisible: true,
       isUpdate: false,
     });
-    const form = this.form;
-    console.log(form)
+    const form = this.addForm;
     form.resetFields();
-  };
-  //填充表格行
-  handleCreate = () => {
-
   };
 
   editClick = (id, index) => {
-    const form = this.form;
+    const form = this.editForm;
     console.log(id + "is" + index)
     const dataSource = toJS(this.props.areaStore.areas);
     const editArea = dataSource.filter(item => {
@@ -127,14 +121,17 @@ class Area extends Component {
     });
     this.setState({
       edit: editArea[0],
+      isUpdate:true
     });
     form.setFieldsValue({
+      id: dataSource[index].id,
+      key: dataSource[index].key,
       name: dataSource[index].name,
       fStatus: dataSource[index].fStatus,
-      coordinate: dataSource[index].coordinate,
+      coordinate: dataSource[index].coordinate
     });
     this.setState({
-      visible: true,
+      editvisible: true,
     });
   };
   handleUpdate = () => {
@@ -144,18 +141,18 @@ class Area extends Component {
         return;
       }
       this.setState({
-        visible: false
+        editvisible: false
       });
     });
   }
 
   //取消
   handleCancel = () => {
-    this.setState({ visible: false });
+    this.setState({ addvisible: false,editvisible:false });
   };
 
   render() {
-    const { isUpdate, visible } = this.state;
+    const { isUpdate, addvisible, editvisible } = this.state;
     const dataSource = toJS(this.props.areaStore.areas);
 
     return (
@@ -167,21 +164,21 @@ class Area extends Component {
             editClick={this.editClick} />
           <div id="container" style={{ height: 400 }}></div>
         </Card>
-        {isUpdate ?
-          <AreaForm
-            ref={this.saveFormRef}
-            visible={visible}
+          <AreaEditForm
+            ref={(form) => this.editForm = form}
+            visible={editvisible}
+            isUpdate={isUpdate}
             onCancel={this.handleCancel}
             onCreate={this.handleUpdate}
             title="修改信息" okText="更新"
-          /> :
+          />
           <AreaForm
-            ref={this.saveFormRef}
-            visible={visible}
+            ref={(form) => this.addForm = form}
+            isUpdate={isUpdate}
+            visible={addvisible}
             onCancel={this.handleCancel}
-            onCreate={this.handleCreate}
             title="新建景区" okText="创建"
-          />}
+          />
       </div>
     );
   }

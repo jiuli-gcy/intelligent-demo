@@ -38,11 +38,11 @@ const AdminList = [
     {
         title: '员工管理',
         icon: 'icon-tongxunlu',
-        key: '/admin/staff',
-        subs: [
-            { key: '/admin/staff/staffinfo', title: '员工信息', icon: '' },
-            { key: '/admin/staff/permission', title: '权限管理', icon: '' },
-        ]
+        key: '/admin/staff/staffinfo',
+        // subs: [
+        //     { key: '/admin/staff/staffinfo', title: '员工信息', icon: '' },
+        //     { key: '/admin/staff/permission', title: '权限管理', icon: '' },
+        // ]
     }
 ];
 export default AdminList;

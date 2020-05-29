@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
 import { Modal, Form, Input, Icon, Button, Select } from 'antd';
-
+import { toJS } from 'mobx';
+import { inject, observer } from 'mobx-react'
 let id = 0;
 const FormItem = Form.Item;
 const Option = Select.Option;
 
+@inject('areaStore') @observer
 class CustomizedForm extends Component {
     constructor(props) {
         super(props);
         this.uuid = 0;
-    }
-    componentDidMount() {
-
     }
     remove = k => {
         const { form } = this.props;
@@ -42,16 +41,25 @@ class CustomizedForm extends Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                const { keys, names } = values;
-                console.log('Received values of form: ', values);
-                console.log('Merged values:', keys.map(key => names[key]));
+                const newdata = {
+                    key: toJS(this.props.areaStore.areas).length+1,
+                    id: toJS(this.props.areaStore.areas).length+1,
+                    name: values.name,
+                    fStatus: values.fStatus,
+                    coordinate: values.coordinate,
+                    location: values.location,
+                    tags:[],
+                    hot:0
+                }
+                console.log(newdata);
+                this.props.areaStore.handleOP(newdata, 'add', this.props.onCancel);
             }
         });
     };
-    getInitialKeys(){
-        const {tag} = this.props;
+    getInitialKeys() {
+        const { tag } = this.props;
         let nextKeys = [];
-        for(let i = 0; i < tag.length; i ++){
+        for (let i = 0; i < tag.length; i++) {
             nextKeys = nextKeys.concat([this.uuid, this.uuid + 1]);
             this.uuid = this.uuid + 2;
         }
@@ -78,7 +86,7 @@ class CustomizedForm extends Component {
             wrapperCol: { span: 16 },
         };
 
-        
+
         getFieldDecorator('keys', { initialValue: [] });
         const keys = getFieldValue('keys');
 
@@ -98,7 +106,7 @@ class CustomizedForm extends Component {
                             message: "请输入坐标",
                         },
                     ],
-                })(<Input placeholder="景区范围点x,y" style={{ width:'80%', marginRight: 8 }} />)}
+                })(<Input placeholder="景区范围点x,y" style={{ width: '80%', marginRight: 8 }} />)}
                 {keys.length > 3 ? (
                     <Icon
                         className="dynamic-delete-button"
