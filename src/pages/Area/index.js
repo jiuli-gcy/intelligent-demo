@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, Button } from 'antd'
+import { BackTop, Card, Button } from 'antd'
 import { toJS } from 'mobx';
 import { inject, observer } from 'mobx-react'
 import AreaForm from './AreaAddForm'
@@ -21,6 +21,7 @@ class Area extends Component {
     this.props.areaStore.getDataFromSessionStorage();
     const areas = toJS(this.props.areaStore.areas);
     this.renderMap(areas);
+    console.log(areas)
   }
   // UNSAFE_componentWillMount() {
   //   this.requestdata()
@@ -35,6 +36,9 @@ class Area extends Component {
     var point = new window.BMapGL.Point(120.162416, 30.333125);  // 创建点坐标(学校中心)
     this.map.centerAndZoom(point, 19);                 // 初始化地图，设置中心点坐标和地图级别
     this.map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+    this.map.addEventListener("click",function(e){
+      alert("点击位置的坐标为："+ e.point.lng + "," + e.point.lat);
+    });
     // 调用景区绘制方法
     this.drwaArea(data);
     //设施绘制方法
@@ -179,6 +183,7 @@ class Area extends Component {
             onCancel={this.handleCancel}
             title="新建景区" okText="创建"
           />
+          <BackTop visibilityHeight={200} style={{ right: 50 }} />
       </div>
     );
   }

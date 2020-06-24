@@ -7,10 +7,10 @@ const columns = [
     { title: '留言', width: 600, dataIndex: 'written', key: 'written', className: 'column-written' },
     { title: '邮箱', width: 200, dataIndex: 'mail', key: 'mail', fixed: 'right', align: 'center' },
     { title: '时间', width: 180, dataIndex: 'time', key: 'time', fixed: 'right', align: 'center' },
-    {
-        title: '操作', width: 100, key: 'operation', fixed: 'right', align: 'center',
-        render: (record) => <Button type="link" >查看详情</Button>,
-    }
+    // {
+    //     title: '操作', width: 100, key: 'operation', fixed: 'right', align: 'center',
+    //     render: (record) => <Button type="link" >查看详情</Button>,
+    // }
 ];
 const data = [{
     key: '1',

@@ -220,7 +220,7 @@ class Home extends Component {
                                 style={{ fontSize: 22 }}
                                 avatar={<img src={require('../../assets/img/cart.png')} alt="" />}
                                 title='待发货'
-                                description={88}
+                                description="-"
                             />
                         </Card>
                     </Col>

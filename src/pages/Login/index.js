@@ -11,9 +11,6 @@ import bgpic from '../../assets/img/bg1.jpg'
 
 const url = bgpic
 
-
-
-
 @withRouter @inject('appStore') @observer
 class Login extends Component {
   state = {
@@ -42,6 +39,8 @@ class Login extends Component {
     this.setState({
       loading:true
     })
+    
+    console.log(this.props.appStore)
     this.props.appStore.initUsers()
     this.loadImageAsync(url).then(url=>{
       this.setState({

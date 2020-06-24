@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import { Row, Col, Input, Icon, Button, BackTop, Card, Modal } from 'antd';
 //import style from './member.module.scss';
 import moment from 'moment';
+import { toJS } from 'mobx';
+import { inject, observer } from 'mobx-react'
+import UserTable from './userTable'
 //import http from 'utils/http';
 //import { releaseMember, updateMember, addMember, listMemberJob } from 'api/member';
 //import MemberEditForm from './memberEditForm';
 //import PMOReleaseForm from './PMORelease';
 //import { MemberAddForm, MemberApplyForm, MemberReleaseForm } from 'components';
-
-import UserTable from './userTable'
 
 const { Search } = Input;
 
@@ -32,6 +33,7 @@ const { Search } = Input;
 // }
 //const getMembers = (url, params) => http.get(url, params);
 
+@inject('appStore') @observer
 class User extends Component {
     constructor(props) {
         super(props);
@@ -55,88 +57,88 @@ class User extends Component {
         };
     }
     //渲染
-    componentDidMount() {
-        this.getData();
-    }
+    // componentDidMount() {
+    //     this.getData();
+    // }
     //数据获取，过滤isquit的数据
-    getData = () => {
-        this.setState({
-            dataSource: [{
-                "key": 0,
-                "userName": "简丽",
-                "userId": 1,
-                "userEmail": "marinus.jagesar@example.com",
-                "userWechat": "jagesar",
-                "userTel": "18355223334",
-                "createTime": "2",
-            }, {
-                "key": 1,
-                "userName": "高达",
-                "userId": 2,
-                "userEmail": "zachary.lavigne@example.com",
-                "userWechat": "zachary",
-                "userTel": "13388223334",
-                "createTime": "2",
-            }, {
-                "key": 2,
-                "userName": "白飞飞",
-                "userId": 3,
-                "userEmail": "levi.willis@example.com",
-                "userWechat": "levi",
-                "userTel": "13377223334",
-                "createTime": "2",
-            }, {
-                "key": 3,
-                "userName": "朱七七",
-                "userId": 4,
-                "userEmail": "tobias.pedersen@example.com",
-                "userWechat": "tobias",
-                "userTel": "13366223334",
-                "createTime": "2",
-            }, {
-                "key": 4,
-                "userName": "张飞",
-                "userId": 5,
-                "userEmail": "samuel.leon@example.com",
-                "userWechat": "samuel",
-                "userTel": "13366278334",
-                "createTime": "2",
-            }, {
-                "key": 5,
-                "userName": "李达康",
-                "userId": 6,
-                "userEmail": "dakang@example.com",
-                "userWechat": "dakang",
-                "userTel": "18666225634",
-                "createTime": "2",
-            }, {
-                "key": 6,
-                "userName": "马冬梅",
-                "userId": 7,
-                "userEmail": "dongmei@example.com",
-                "userWechat": "dongmei",
-                "userTel": "13366323444",
-                "createTime": "2",
-            }, {
-                "key": 7,
-                "userName": "展昭",
-                "userId": 8,
-                "userEmail": "zhanzhao@example.com",
-                "userWechat": "zhanzhao",
-                "userTel": "13712345678",
-                "createTime": "2",
-            }, {
-                "key": 8,
-                "userName": "范闲",
-                "userId": 9,
-                "userEmail": "fanxian@example.com",
-                "userWechat": "fanxian",
-                "userTel": "13398223114",
-                "createTime": "2",
-            }]
-        });
+    // getData = () => {
+    //     this.setState({
+    //         dataSource: [{
+    //             "key": 0,
+    //             "userName": "简丽",
+    //             "userId": 1,
+    //             "userEmail": "marinus.jagesar@example.com",
+    //             "userWechat": "jagesar",
+    //             "userTel": "18355223334",
+    //             "createTime": "2",
+    //         }, {
+    //             "key": 1,
+    //             "userName": "高达",
+    //             "userId": 2,
+    //             "userEmail": "zachary.lavigne@example.com",
+    //             "userWechat": "zachary",
+    //             "userTel": "13388223334",
+    //             "createTime": "2",
+    //         }, {
+    //             "key": 2,
+    //             "userName": "白飞飞",
+    //             "userId": 3,
+    //             "userEmail": "levi.willis@example.com",
+    //             "userWechat": "levi",
+    //             "userTel": "13377223334",
+    //             "createTime": "2",
+    //         }, {
+    //             "key": 3,
+    //             "userName": "朱七七",
+    //             "userId": 4,
+    //             "userEmail": "tobias.pedersen@example.com",
+    //             "userWechat": "tobias",
+    //             "userTel": "13366223334",
+    //             "createTime": "2",
+    //         }, {
+    //             "key": 4,
+    //             "userName": "张飞",
+    //             "userId": 5,
+    //             "userEmail": "samuel.leon@example.com",
+    //             "userWechat": "samuel",
+    //             "userTel": "13366278334",
+    //             "createTime": "2",
+    //         }, {
+    //             "key": 5,
+    //             "userName": "李达康",
+    //             "userId": 6,
+    //             "userEmail": "dakang@example.com",
+    //             "userWechat": "dakang",
+    //             "userTel": "18666225634",
+    //             "createTime": "2",
+    //         }, {
+    //             "key": 6,
+    //             "userName": "马冬梅",
+    //             "userId": 7,
+    //             "userEmail": "dongmei@example.com",
+    //             "userWechat": "dongmei",
+    //             "userTel": "13366323444",
+    //             "createTime": "2",
+    //         }, {
+    //             "key": 7,
+    //             "userName": "展昭",
+    //             "userId": 8,
+    //             "userEmail": "zhanzhao@example.com",
+    //             "userWechat": "zhanzhao",
+    //             "userTel": "13712345678",
+    //             "createTime": "2",
+    //         }, {
+    //             "key": 8,
+    //             "userName": "范闲",
+    //             "userId": 9,
+    //             "userEmail": "fanxian@example.com",
+    //             "userWechat": "fanxian",
+    //             "userTel": "13398223114",
+    //             "createTime": "2",
+    //         }]
+    //     });
 
-    }
+    // }
     // getData = () => {
     //     this.setState({
     //         loading: true,
@@ -192,7 +194,9 @@ class User extends Component {
         //console.log(this.state.showData);
         //console.log(this.state.dataSource);
     };
-    
+    handleDelete(record){
+        this.props.appStore.handleDelete(record);
+    }
     //重置按钮清空搜索条件
     btnClear_Click = () => {
         this.setState({
@@ -279,24 +283,24 @@ class User extends Component {
     };
 
     //删除人员--------------------------------------------------------
-    onDelete = (key) => {
-        console.log(key)
-        this.setState({
-            releaseStaff: key,
-            releaseVisible: true
-        })
-        console.log(this.state)
-    };
+    // onDelete = (key) => {
+    //     console.log(key)
+    //     this.setState({
+    //         releaseStaff: key,
+    //         releaseVisible: true
+    //     })
+    //     console.log(this.state)
+    // };
 
-    onDeleteConfirm = () => {
-        console.log(this.state)
-        const dataSource = [...this.state.dataSource];
-        const { releaseStaff } = this.state;
-        this.setState({
-            dataSource: dataSource.filter(item => item.key !== releaseStaff),
-            releaseVisible: false
-        });
-    }
+    // onDeleteConfirm = () => {
+    //     console.log(this.state)
+    //     const dataSource = [...this.state.dataSource];
+    //     const { releaseStaff } = this.state;
+    //     this.setState({
+    //         dataSource: dataSource.filter(item => item.key !== releaseStaff),
+    //         releaseVisible: false
+    //     });
+    // }
 
     //PM、PMO修改成员-------------------------------------------------
     editClick = (id, index) => {
@@ -341,12 +345,13 @@ class User extends Component {
 
     //-----------------------------------------------------------------
     render() {
-        const { searchName, status, dataSource, releaseVisible, loading } = this.state;
+        const { searchName, status, releaseVisible, loading } = this.state;
+        const dataSource = toJS(this.props.appStore.visitors);
         return (
             <div>
                 <div id="cards" style={{ padding: '15px' }}>
                     <Card title="景区游客">
-                        <Row style={{ float: 'right', zIndex: '2' }}>
+                        {/* <Row style={{ float: 'right', zIndex: '2' }}>
                             <Col className="gutter-row" style={{ marginBottom: '15px' }} span={8}>
                                 <Search
                                     placeholder="用户搜索"
@@ -361,16 +366,16 @@ class User extends Component {
                                     <Button type="primary" onClick={this.btnClear_Click} style={{ background: '#f8f8f8', color: '#108ee9' }}>清空搜索条件</Button>
                                 </div>
                             </Col>
-                        </Row>
+                        </Row> */}
                         <UserTable
                             status={status}
                             dataSource={dataSource}
-                            onDelete={this.onDelete}
-                            editClick={this.editClick}
+                            // onDelete={this.handleDelete}
+                            // editClick={this.editClick}
                             loading={loading}
                         />
                     </Card>
-                    <Modal
+                    {/* <Modal
                         title="警告"
                         visible={releaseVisible}
                         onOk={this.onDeleteConfirm}
@@ -380,7 +385,7 @@ class User extends Component {
                         okType="danger"
                     >
                         <p>确认删除成员？</p>
-                    </Modal>
+                    </Modal> */}
                 </div>
                 <BackTop visibilityHeight={200} style={{ right: 50 }} />
             </div>
